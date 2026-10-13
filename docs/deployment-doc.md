@@ -4,25 +4,6 @@
 
 PraisonAI 是一个开源的多智能体编排框架，提供对话、智能体、技能、记忆、知识库、定时任务和日志等功能。本方案通过 Docker Compose 在一台云服务器 ECS 上部署 PraisonAI Claw 控制台，适合功能体验和开发测试。
 
-## 前提条件
-
-部署 PraisonAI 需要创建 ECS、VPC 和资源编排栈。使用 RAM 用户时，请确保已授予以下权限：
-
-| 权限策略名称 | 说明 |
-| --- | --- |
-| AliyunECSFullAccess | 管理云服务器 ECS |
-| AliyunVPCFullAccess | 管理专有网络 VPC |
-| AliyunROSFullAccess | 管理资源编排 ROS |
-| AliyunComputeNestUserFullAccess | 管理计算巢用户侧资源 |
-
-## 计费说明
-
-部署费用主要来自 ECS 实例、系统盘和公网带宽。创建服务实例时，控制台会根据所选地域、可用区和实例规格显示预估费用，最终费用以实际账单为准。
-
-## 部署架构
-
-计算巢通过 ROS 创建 VPC、交换机、安全组和 ECS 实例，并在 ECS 中以 Docker Compose 运行 PraisonAI。公网访问流量先经过 Nginx Basic Auth，再转发到仅监听实例本机回环地址的 PraisonAI 应用。
-
 ## 部署流程
 
 ### 1. 创建服务实例
