@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="计算巢是阿里云开放给企业应用服务商的服务管理平台。服务商能够在计算巢上发布私有化部署服务，为其客户提供云上软件一键部署的能力；同时也支持全托管模式的服务，赋能服务商托管其客户资源。">
+  <title>PraisonAI 部署文档 - Aliyun 计算巢 x PraisonAI</title>
+
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
+
+  
+
+  
+  
+
+  
+    <script src="search/main.js"></script>
+  
+
+  
+
+  <script src="js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="nav-inner">
+        <div class="logo">
+          <img src="./img/logo-2x.png">
+        </div>
+        <div class="nav-list">
+          <ul>
+          
+              <li><a href="#praisonai">PraisonAI 部署文档</a></li>
+              
+                  <li><a href="#_1">概述</a></li>
+                  
+              
+                  <li><a href="#_2">部署流程</a></li>
+                  
+                      <li class="li-h3"><a href="#1">1. 创建服务实例</a></li>
+                  
+                      <li class="li-h3"><a href="#2">2. 确认订单并创建</a></li>
+                  
+                      <li class="li-h3"><a href="#3">3. 等待部署完成</a></li>
+                  
+                      <li class="li-h3"><a href="#4">4. 访问服务</a></li>
+                  
+              
+                  <li><a href="#_3">使用说明</a></li>
+                  
+              
+                  <li><a href="#_4">数据与安全</a></li>
+                  
+              
+                  <li><a href="#_5">资源释放</a></li>
+                  
+              
+                  <li><a href="#_6">官方文档</a></li>
+                  
+              
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="content theme-github">
+      
+      <div class="content-inner">        
+        
+        <h1 id="praisonai">PraisonAI 部署文档</h1>
+<h2 id="_1">概述</h2>
+<p>PraisonAI 是一个开源的多智能体编排框架，提供对话、智能体、技能、记忆、知识库、定时任务和日志等功能。本方案通过 Docker Compose 在一台云服务器 ECS 上部署 PraisonAI Claw 控制台，适合功能体验和开发测试。</p>
+<h2 id="_2">部署流程</h2>
+<h3 id="1">1. 创建服务实例</h3>
+<p>访问 <a href="https://computenest.console.aliyun.com/service/instance/create/cn-hangzhou?type=user&amp;ServiceId=service-3fe8800bc3fd4d9cb766">PraisonAI 部署链接</a>，按页面提示填写部署参数。</p>
+<p><img alt="创建服务实例" src="images/create-instance.png" /></p>
+<p>主要参数如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>服务实例名称</td>
+<td>长度不超过 64 个字符，以英文字母开头</td>
+</tr>
+<tr>
+<td>地域、可用区</td>
+<td>ECS 部署位置，建议选择离使用者较近的地域</td>
+</tr>
+<tr>
+<td>付费类型</td>
+<td>支持按量付费和包年包月，具体以页面为准</td>
+</tr>
+<tr>
+<td>实例类型</td>
+<td>PraisonAI 所在 ECS 的规格</td>
+</tr>
+<tr>
+<td>实例密码</td>
+<td>ECS 登录密码，请按页面密码复杂度要求填写</td>
+</tr>
+<tr>
+<td>OpenAI API Key</td>
+<td>OpenAI 兼容接口的访问密钥</td>
+</tr>
+<tr>
+<td>LLM 服务地址</td>
+<td>OpenAI 兼容接口地址；使用百炼时可填写 <code>https://dashscope.aliyuncs.com/compatible-mode/v1</code></td>
+</tr>
+<tr>
+<td>LLM 模型名称</td>
+<td>接口支持的模型名；使用百炼时可填写 <code>qwen-plus</code></td>
+</tr>
+<tr>
+<td>Tavily API Key</td>
+<td>可选，启用相关联网搜索能力时填写</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2">2. 确认订单并创建</h3>
+<p>参数填写完成后，单击 <strong>下一步：确认订单</strong>。确认资源和费用，阅读并同意服务协议，然后单击 <strong>立即创建</strong>。</p>
+<h3 id="3">3. 等待部署完成</h3>
+<p>提交成功后进入服务实例列表。待实例状态变为 <strong>已部署</strong>，打开实例详情。通常需要等待数分钟。</p>
+<p><img alt="服务实例详情" src="images/instance-detail.png" /></p>
+<h3 id="4">4. 访问服务</h3>
+<p>在实例详情页的 <strong>立即使用</strong> 区域获取 PraisonAI 地址和网页访问密码。打开地址后，在浏览器认证窗口中输入用户名 <code>admin</code> 和对应密码，即可进入 PraisonAI Dashboard。</p>
+<p><img alt="PraisonAI 页面" src="images/service-page.png" /></p>
+<h2 id="_3">使用说明</h2>
+<p>进入 Dashboard 后，可使用以下功能：</p>
+<ul>
+<li>在 <strong>Chat</strong> 中选择智能体并创建对话。</li>
+<li>在 <strong>Agents</strong>、<strong>Skills</strong> 中管理智能体和技能。</li>
+<li>在 <strong>Memory</strong>、<strong>Knowledge</strong> 中维护记忆和知识库。</li>
+<li>在 <strong>Cron</strong> 中配置定时任务。</li>
+<li>在 <strong>Logs</strong>、<strong>Debug</strong> 中查看运行日志并排查问题。</li>
+</ul>
+<p>如果对话没有响应，请先确认 API Key、LLM 服务地址和模型名称相互匹配，并检查所选模型是否已开通。</p>
+<h2 id="_4">数据与安全</h2>
+<ul>
+<li>会话、配置、记忆和知识库数据保存在 Docker 命名卷中。删除服务实例会释放相关资源，请提前导出需要保留的数据。</li>
+<li>PraisonAI 应用端口不应直接暴露到公网，请保留部署方案提供的 Nginx 认证代理。</li>
+<li>请妥善保管 ECS 密码、模型 API Key 和网页访问密码，避免在日志或公开仓库中泄露。</li>
+</ul>
+<h2 id="_5">资源释放</h2>
+<p>不再使用时，在计算巢控制台删除服务实例，并确认关联的 ROS 栈、ECS、VPC 等资源均已释放，避免继续产生费用。</p>
+<h2 id="_6">官方文档</h2>
+<ul>
+<li><a href="https://docs.praison.ai/">PraisonAI 官方文档</a></li>
+<li><a href="https://github.com/MervinPraison/PraisonAI">PraisonAI GitHub 仓库</a></li>
+</ul>
+        
+      </div>
+
+      <div class="copyrights">© 2009-2022 Aliyun.com 版权所有</div>
+    </div>
+  </div>
+  
+  <!--
+  MkDocs version      : 1.6.1
+  Docs Build Date UTC : 2026-10-13 02:58:02.818975+00:00
+  -->
+</body>
+</html>
